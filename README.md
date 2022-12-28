@@ -2,10 +2,10 @@
 
 This repository contains CDK samples for commonly used architecture patterns.
 
-## Bootstrap AWS environment for CDK deployment (Pre-requisite)
+## Pre-requisite (Bootstrap AWS environment)
 You need to provision a few AWS resources in advance to deploy a CDK app in an environment. Those resources include:
-- Amazon S3 bucket for storing CloudFormation files
-- IAM roles that grant permissions needed to perform deployments
+- **Amazon S3** bucket for storing CloudFormation files
+- **IAM roles** that grant permissions needed to perform deployments
 The process of provisioning these initial resources is called bootstrapping.
 
 Bootstrapping is required only once per environment, where the *environment* is a combination of the target AWS account & region into which the stack is intended to be deployed.
@@ -15,7 +15,7 @@ To bootstrap, your AWS environment for CDK deployment, run the below command.
 cdk bootstrap
 ```
 
-## How to deploy CDK stack
+## How to deploy CDK stack - Step by Step
 1. Clone this repo `git clone https://github.com/ankushjain358/aws-cdk-dotnet-samples.git`
 2. Open solution in Visual Studio or Visual Studio Code.
 3. Go to `Program.cs` file, and uncomment the stack that you want to deploy.
@@ -41,21 +41,15 @@ cdk bootstrap
     cdk deploy
     ```
 
-
-## 1. Static Site With S3 and CloudFront
+## Available CDK Stacks
+### 1. Static Site With S3 and CloudFront
 This stack creates an S3 bucket and CloudFront distribution. S3 bucket is privately accessed by CloudFront using Origin Access Idenity.
 
-- Stack location: `/static-site-s3-cloudfront/static-site-s3-cloudfront.cs`
-- Primary Resources: S3 bucket, CloudFront distribution
+- Stack location: `/static-site-s3-cloudfront/StaticSiteWithS3AndCloudFrontStack.cs`
+- Primary Resources: 
+    - S3 bucket
+    - CloudFront distribution
 
-
-## Useful commands
-
-* `dotnet build src` compile this app
-* `cdk deploy`       deploy this stack to your default AWS account/region
-* `cdk diff`         compare deployed stack with current state
-* `cdk synth`        emits the synthesized CloudFormation template
-
-# References
+## References
 - [Getting Started with AWS CDK using .NET](https://coderjony.com/blogs/getting-started-with-aws-cdk-using-net)
 - [What does CDK Diff do in AWS CDK](https://bobbyhadz.com/blog/what-does-cdk-diff-do)
