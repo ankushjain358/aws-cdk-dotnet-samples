@@ -3,17 +3,21 @@
 This repository contains CDK samples for commonly used architecture patterns.
 
 ## Pre-requisite (Bootstrap AWS environment)
-You need to provision a few AWS resources in advance to deploy a CDK app in an environment. Those resources include:
-- **Amazon S3** bucket for storing CloudFormation files
-- **IAM roles** that grant permissions needed to perform deployments
-The process of provisioning these initial resources is called bootstrapping.
-
-Bootstrapping is required only once per environment, where the *environment* is a combination of the target AWS account & region into which the stack is intended to be deployed.
-
-To bootstrap, your AWS environment for CDK deployment, run the below command.
+This is the first step, and this step does not even require you to clone this repo. First of all install AWS CDK CLI using below command.
+```
+npm install -g aws-cdk
+```
+Next, you need to bootstrap your AWS environment for CDK deployment by running below command.
 ```
 cdk bootstrap
 ```
+This command will provision the below AWS resources in your AWS account as they are required to deploy a CDK app.
+- **Amazon S3** bucket for storing CloudFormation files
+- **IAM roles** that grant permissions needed to perform deployments
+
+The process of provisioning these initial resources is called bootstrapping.
+
+Bootstrapping is required only once per environment, where the *environment* is a combination of the target AWS account & region into which the stack is intended to be deployed.
 
 ## How to deploy CDK stack - Step by Step
 1. Clone this repo `git clone https://github.com/ankushjain358/aws-cdk-dotnet-samples.git`
