@@ -12,7 +12,7 @@ namespace AwsCdkDotnetSamples
             var app = new App();
             
             // Uncomment this to deploy static site resources including S3 & CloudFront
-            new StaticSiteWithS3AndCloudFrontStack(app, "StaticSite_Stack");
+            new StaticSiteWithS3AndCloudFrontStack(app, "StaticWebsite");
             
             app.Synth();
         }

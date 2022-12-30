@@ -9,8 +9,9 @@ npm install -g aws-cdk
 ```
 Next, you need to bootstrap your AWS environment for CDK deployment by running below command.
 ```
-cdk bootstrap
+cdk bootstrap aws://ACCOUNT-NUMBER-1/REGION-1
 ```
+
 This command will provision the below AWS resources in your AWS account as they are required to deploy a CDK app.
 - **Amazon S3** bucket for storing CloudFormation files
 - **IAM roles** that grant permissions needed to perform deployments

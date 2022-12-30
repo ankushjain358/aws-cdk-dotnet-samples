@@ -14,9 +14,7 @@ namespace AwsCdkDotnetSamples
             // 1. Create S3 bucket
             var siteBucket = new Bucket(this, "Bucket", new BucketProps
             {
-                BucketName = id,
                 Versioned = false,
-                PublicReadAccess = true,
             });
 
             // 2. Creating the CloudFront distribution that serves the files from the S3 bucket
@@ -28,7 +26,7 @@ namespace AwsCdkDotnetSamples
 
             var distribution = new CloudFrontWebDistribution(this, "WebDistribution", new CloudFrontWebDistributionProps
             {
-                OriginConfigs = new ISourceConfiguration[]
+               OriginConfigs = new ISourceConfiguration[]
                {
                     new SourceConfiguration
                     {
