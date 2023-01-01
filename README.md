@@ -31,7 +31,7 @@ Bootstrapping is required only once per environment, where the *environment* is 
         var app = new App();
             
         // Uncomment this to deploy static site resources including S3 & CloudFront
-        new StaticSiteWithS3AndCloudFrontStack(app, "StaticSite_Stack");
+        new StaticSiteWithS3AndCloudFrontStack(app, "StaticWebsite");
             
         app.Synth();
     }

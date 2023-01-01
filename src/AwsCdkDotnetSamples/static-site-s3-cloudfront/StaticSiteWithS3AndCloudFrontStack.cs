@@ -1,9 +1,7 @@
 ﻿using Amazon.CDK;
 using Amazon.CDK.AWS.CloudFront;
 using Amazon.CDK.AWS.S3;
-using Amazon.CDK.AWS.S3.Deployment;
 using Constructs;
-using System.Net.Sockets;
 
 namespace AwsCdkDotnetSamples
 {
@@ -15,19 +13,38 @@ namespace AwsCdkDotnetSamples
             var siteBucket = new Bucket(this, "Bucket", new BucketProps
             {
                 Versioned = false,
+                PublicReadAccess = false,
+                BlockPublicAccess = BlockPublicAccess.BLOCK_ALL
             });
 
             // 2. Creating the CloudFront distribution that serves the files from the S3 bucket
             var behavior = new Behavior();
             behavior.IsDefaultBehavior = true;
+            behavior.ViewerProtocolPolicy = ViewerProtocolPolicy.REDIRECT_TO_HTTPS;
 
             var originAccessIdentity = new OriginAccessIdentity(this, "OAI");
             siteBucket.GrantRead(originAccessIdentity);
 
             var distribution = new CloudFrontWebDistribution(this, "WebDistribution", new CloudFrontWebDistributionProps
             {
-               OriginConfigs = new ISourceConfiguration[]
-               {
+                PriceClass = PriceClass.PRICE_CLASS_ALL,
+                ErrorConfigurations = new CfnDistribution.ICustomErrorResponseProperty[]
+                {
+                    new CfnDistribution.CustomErrorResponseProperty
+                    {
+                        ErrorCode = 403,
+                        ResponseCode = 200,
+                        ResponsePagePath = "/index.html"
+                    },
+                    new CfnDistribution.CustomErrorResponseProperty
+                    {
+                        ErrorCode = 404,
+                        ResponseCode = 200,
+                        ResponsePagePath = "/index.html"
+                    }
+                },
+                OriginConfigs = new ISourceConfiguration[]
+                {
                     new SourceConfiguration
                     {
                         S3OriginSource = new S3OriginConfig
@@ -37,7 +54,7 @@ namespace AwsCdkDotnetSamples
                         },
                         Behaviors = new Behavior[] { behavior }
                     }
-               }
+                }
             });
         }
     }
